@@ -63,12 +63,12 @@ public class Classe implements Comparable<Classe>{
 	}
 	
 	public String[] stampaRigheOrario() {
-		String[] output = new String[6];
+		String[] output = new String[6*5];
 		for (int i = 0; i<6; i++) {
 			for (int j=0; j<5; j++) {
 				int giorno = i+1;
 				int ora = j+1;
-				output[i] = giorno + "," + ora + "," + orario.get(giorno).get(ora);
+				output[5*i+j] = giorno + "," + ora + "," + orario.get(giorno).get(ora);
 			}
 		}
 		return output;

@@ -67,7 +67,7 @@ public class IstitutoComprensivo {
 		/*
 		 * Estraggo l'ultima classe di quella scuola, a quel grado, a quel anno
 		 * 
-		 * Se la lista è vuota assegno A
+		 * Se la lista ï¿½ vuota assegno A
 		 * Altrimenti in base al carattere passo al successivo
 		 * 
 		 * Creo la nuova classe e la aggiungo alle strutture dati
@@ -280,12 +280,13 @@ public class IstitutoComprensivo {
 		for (String giornoOrario : righeOrario) {
 			String[] componentsOfOraio = giornoOrario.split(",");
 			Docente docente = null;
-			if (componentsOfOraio != null) {
+			if (!componentsOfOraio[2].equals("null")) {
 				String materia = giornoOrario.split(",")[2];
 				docente = docenteClasseMateria(codiceClasse, materia);
-				output += giornoOrario + "," + docente.getMatricola() + "\n"; 
-			} else {
-				output += giornoOrario + "," + "null" + "\n";
+				if (docente != null)
+					output += giornoOrario + "," + docente.getMatricola() + "\n"; 
+				else
+					output += giornoOrario + "\n";
 			}
 		}
 		return output;
