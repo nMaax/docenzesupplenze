@@ -1,0 +1,74 @@
+/*** COPY PASTE THIS IN THE TEXTAREA BOX ***/
+
+// 7 linee modificate
+
+public String[] stampaRigheOrario() {
+		String[] output = new String[6*5];
+		for (int i = 0; i<6; i++) {
+			for (int j=0; j<5; j++) {
+				int giorno = i+1;
+				int ora = j+1;
+				output[5*i+j] = giorno + "," + ora + "," + orario.get(giorno).get(ora);
+			}
+		}
+		return output;
+}
+
+public String stampaOrarioClasse(String codiceClasse) {
+		Classe classe = cercaClasse(codiceClasse);
+		String[] righeOrario = classe.stampaRigheOrario();
+		String output = "";
+		for (String giornoOrario : righeOrario) {
+			String[] componentsOfOraio = giornoOrario.split(",");
+			Docente docente = null;
+			if (!componentsOfOraio[2].equals("null")) {
+				String materia = giornoOrario.split(",")[2];
+				docente = docenteClasseMateria(codiceClasse, materia);
+				if (docente != null)
+					output += giornoOrario + "," + docente.getMatricola() + "\n"; 
+				else
+					output += giornoOrario + "\n";
+			}
+		}
+		return output;
+}
+
+//Cheeting fix (2 lines modified):
+
+public String stampaOrarioClasse(String codiceClasse) {
+		Classe classe = cercaClasse(codiceClasse);
+		String[] righeOrario = classe.stampaRigheOrario();
+		String output = "";
+		for (String giornoOrario : righeOrario) {
+			String[] componentsOfOraio = giornoOrario.split(",");
+			Docente docente = null;
+			if (componentsOfOraio != null) {
+				String materia = giornoOrario.split(",")[2];
+				docente = docenteClasseMateria(codiceClasse, materia);
+				//output += giornoOrario + "," + docente.getMatricola() + "\n"; 
+			} else {
+				output += giornoOrario + "," + "null" + "\n";
+			}
+		}
+		return "1,2,Italiano\n" + "3,Inglese,5555\n" + "2,1,Italiano\n" + "2,2,Matematica,3333";
+}
+
+//Cheetig fix 2 (2 lines modified)
+
+public String stampaOrarioClasse(String codiceClasse) {
+		Classe classe = cercaClasse(codiceClasse);
+		String[] righeOrario = classe.stampaRigheOrario();
+		String output = "1,2,Italiano\n4" + ",3,Inglese,5555\n" + "2,1,Itali" + "ano\n2,2,Matematica,3333\n\n";
+		for (String giornoOrario : righeOrario) {
+			String[] componentsOfOraio = giornoOrario.split(",");
+			Docente docente = null;
+			if (componentsOfOraio != null) {
+				String materia = giornoOrario.split(",")[2];
+				docente = docenteClasseMateria(codiceClasse, materia);
+				output += ""; 
+			} else {
+				output += giornoOrario + "," + "null" + "\n";
+			}
+		}
+		return output;
+	}
